@@ -41,17 +41,24 @@ public class menuView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Super TODO S.A.");
+        setPreferredSize(new java.awt.Dimension(700, 600));
+        setSize(new java.awt.Dimension(700, 600));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        escritorio.setPreferredSize(new java.awt.Dimension(700, 600));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
+
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 600));
 
         jmAdmin.setText("Administración ");
 
@@ -80,22 +87,20 @@ public class menuView extends javax.swing.JFrame {
 
         setJMenuBar(jmSuperTodo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNombreActionPerformed
-        // TODO add your handling code here:
+        
+        escritorio.removeAll(); //Removemos todas las ventanas del JDesktop
+        escritorio.repaint(); //redibujamos el JDesktop
+        
+        //Instanciamos la vista deseada
+        PorNombreView bpnv = new PorNombreView();
+        
+        bpnv.setVisible(true);
+        escritorio.add(bpnv);
+        escritorio.moveToFront(bpnv);
     }//GEN-LAST:event_jmiNombreActionPerformed
 
     /**
@@ -126,10 +131,8 @@ public class menuView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new menuView().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new menuView().setVisible(true);
         });
     }
 
@@ -148,10 +151,11 @@ public class menuView extends javax.swing.JFrame {
     private void cargarProductos() {
         listaProductos.add(new Producto(10, "Azúcar", 180, 20, Categoria.COMESTIBLES));
         listaProductos.add(new Producto(20, "Yerba", 500, 80, Categoria.COMESTIBLES));
-        listaProductos.add(new Producto(12, "Jabón Paltos", 70, 100, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(12, "Jabón Platos", 70, 100, Categoria.LIMPIEZA));
         listaProductos.add(new Producto(3, "Jabón Ropa", 1000, 10, Categoria.LIMPIEZA));
         listaProductos.add(new Producto(100, "Perfume Femenino", 18000, 5, Categoria.PERFUMERIA));
-        listaProductos.add(new Producto(10, "Jabón para manos", 18, 2000, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(101, "Jabón para manos", 18, 2000, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(23, "Aceite", 800, 2, Categoria.COMESTIBLES));
     }
 
 }
